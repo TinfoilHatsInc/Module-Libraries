@@ -17,14 +17,12 @@ public:
 	uint64_t init();
 	void initHash(uint64_t);
 
-	void listenToBroadcast();
-	void updateHashes();
+	uint receivedBroadcast();
+	void updateHash(uint64_t);
 
 private:
 	int LS_location_sig;
 	int LS_location_hash;
-	void respondToBroadcast();
-
 };
 
 

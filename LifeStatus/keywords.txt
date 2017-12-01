@@ -1,0 +1,26 @@
+#######################################
+# Syntax Coloring Map For LifeStatusLibrary
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+LifeSatus	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init    	        KEYWORD2
+initHash            KEYWORD2
+receivedBroadcast   KEYWORD2
+updateHash          KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
