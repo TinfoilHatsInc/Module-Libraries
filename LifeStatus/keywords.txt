@@ -6,16 +6,16 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-LifeSatus	KEYWORD1
+LifeStatus	KEYWORD1 LifeStatus
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-init    	        KEYWORD2
-initHash            KEYWORD2
+lsnit   KEYWORD2
+initHash    KEYWORD2
 receivedBroadcast   KEYWORD2
-updateHash          KEYWORD2
+updateHash  KEYWORD2
 
 #######################################
 # Instances (KEYWORD2)

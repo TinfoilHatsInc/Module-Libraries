@@ -9,7 +9,7 @@ LifeStatus::LifeStatus(uint64_t signature)
     EEPROM.put(LS_location_sig, signature);
 }
 
-uint64_t LifeStatus::init()
+uint64_t LifeStatus::lsinit()
 {   
     uint64_t LS_signature;
     EEPROM.get(LS_location_sig, LS_signature);

@@ -14,10 +14,10 @@ class LifeStatus
 {
 public:
 	LifeStatus(uint64_t);
-	uint64_t init();
+	uint64_t lsinit();
 	void initHash(uint64_t);
 
-	uint receivedBroadcast();
+	uint64_t receivedBroadcast();
 	void updateHash(uint64_t);
 
 private:
