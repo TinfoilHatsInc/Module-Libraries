@@ -1,7 +1,3 @@
-2.2 threshold
-lower = not triggered
-higher = triggered.
-
 #ifndef MotionModule_h
 #define MotionModule_h
 
