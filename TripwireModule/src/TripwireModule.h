@@ -12,7 +12,7 @@
 class TripwireModule
 {
 public:
-    MotionModule(int);
+    MotionModule(int, int);
     void CheckTrigger();
     void MeasureDistance();
 private:

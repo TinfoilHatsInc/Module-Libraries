@@ -9,7 +9,7 @@ DoorModule::DoorModule(int InputPin){
 }
 
 void DoorModule::CheckTrigger(){
-    int analogValue = analogRead(analogPin);
+    int analogValue = analogRead(SensorAnalogPin);
     if (analogValue < Threshold) {
         digitalWrite(LED_BUILTIN, HIGH);
     } else {
