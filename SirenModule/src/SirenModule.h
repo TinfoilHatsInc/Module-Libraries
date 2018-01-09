@@ -13,8 +13,8 @@ class SirenModule
 {
 public:
     SirenModule(int);
-    void soundAlarm();
-    void turnOffAlarm();
+    void turnOnSiren();
+    void turnOffSiren();
 private:
     int SirenPin;
 }; 
