@@ -2,7 +2,14 @@
 
 ModulePath::ModulePath(){
   ModulePath::slaveAddress = 127;
-  ModulePath::requestFeedback = 0;
+  ModulePath::requestAddress = 0;
+  Wire.begin(ModulePath::slaveAddress);
+  Wire.onReceive(logEvent);
+  Wire.onRequest(writeBackEvent);
+}
+
+void ModulePath::relog(int newAddr){
+  ModulePath::slaveAddress = newAddr;
   Wire.begin(ModulePath::slaveAddress);
   Wire.onReceive(logEvent);
   Wire.onRequest(writeBackEvent);
@@ -11,43 +18,48 @@ ModulePath::ModulePath(){
 void ModulePath::logEvent(){
   int request = Wire.read();
   char c;
+  int pointer = 0;
   switch (request) {
     case 128:
-      ModulePath::requestFeedback = request;
+      char[50] buffer;
+      ModulePath::requestAddress = 200;
       while(1 < Wire.available()){
         c = Wire.read();
-          //Respond with Signature
+          buffer[pointer++] = c;
         }
+        EEPROMSave::saveAddress(std::string(buffer));
+        pointer = 0;
     break;
     case 127:
-      ModulePath::requestFeedback = request;
+      char[50] buffer;
+      ModulePath::requestAddress = 200;
       while(1 < Wire.available()){
         c = Wire.read();
-          //React by saving the first Hash, respond 200
+          buffer[pointer++] = c;
         }
+        EEPROMSave::saveHash(std::string(buffer));
+        pointer = 0;
     break;
     case 126:
-      ModulePath::requestFeedback = request;
+      ModulePath::requestAddress = 200;
       while(1 < Wire.available()){
         c = Wire.read();
-          //React by saving new slaveAddress, respond 200
         }
+        relog(EEPROMSave::getAddress);
     break;
     case 125:
-      ModulePath::requestFeedback = request;
+      ModulePath::requestAddress = 125;
       while(1 < Wire.available()){
         c = Wire.read();
-          //Respond with alarm status
         }
     break;
     case 124:
-      ModulePath::requestFeedback = request;
+      ModulePath::requestAddress = request;
       while(1 < Wire.available()){
-        //Respond with Hash
       }
     break;
     case 123:
-      ModulePath::requestFeedback = request;
+      ModulePath::requestAddress = request;
       while(1 < Wire.available()){
         //Respond with 200/201
       }
@@ -56,23 +68,26 @@ void ModulePath::logEvent(){
 }
 
 
-void writeBackEvent(){
-  switch (ModulePath::requestFeedback) {
+void ModulePath::writeBackEvent(){
+  switch (ModulePath::requestAddress) {
     case 200:
       Wire.write(200);
-      ModulePath::requestFeedback = 0;
+      ModulePath::requestAddress = 0;
     break;
     case 201:
       Wire.write(201);
-      ModulePath::requestFeedback = 0;
+      ModulePath::requestAddress = 0;
     break;
     case 128:
       Wire.write(TinfoilModule::Signature);
-      ModulePath::requestFeedback = 0;
+      ModulePath::requestAddress = 0;
     break;
     case 125:
-      Wire.write(TinfoilModule::status);
-      ModulePath::requestFeedback = 0;
+      Wire.write(TinfoilModule::alarmStatus);
+      ModulePath::requestAddress = 0;
     break;
   }
 }
+
+//hash 8 bytes
+//

@@ -2,5 +2,6 @@
 
 class TinfoilModule{
 protected:
-  static bool status;
+  static bool alarmStatus;
+
 };

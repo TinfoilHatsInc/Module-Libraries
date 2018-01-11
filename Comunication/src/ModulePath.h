@@ -1,17 +1,18 @@
-#include "Arduino.h"
+#include "/usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h"
 #include "TinfoilModule.h"
-#include "EEPROM.h"
-#include "Wire.h"
+#include "/usr/share/arduino/libraries/Wire/Wire.h"
 
 
 class ModuleLogin: public TinFoilModule{
 public:
+
   ModuleLogin();
 
 private:
   static int slaveAddress;
-  static int requestFeedback;
+  static int requestAddress;
 
   void logEvent();
+  void relog(int newAddr);
   void writeBackEvent();
 };

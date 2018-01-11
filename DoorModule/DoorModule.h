@@ -20,6 +20,6 @@ private:
     int SensorOutputPin;
     int SensorInputPin;
     bool Armed;
-}; 
+};
 
 #endif
