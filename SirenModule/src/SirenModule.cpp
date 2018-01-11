@@ -7,12 +7,12 @@ SirenModule::SirenModule(int pin)
     pinMode(SirenPin,OUTPUT);
 }
 
-void SirenModule::soundAlarm()
+void SirenModule::turnOnSiren()
 {
     digitalWrite(SirenPin,HIGH);
 }
 
-void turnOffAlarm()
+void turnOffSiren()
 {
     digitalWrite(SirenPin,LOW);
 }
