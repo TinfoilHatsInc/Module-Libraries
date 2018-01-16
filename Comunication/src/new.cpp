@@ -1,5 +1,6 @@
 #include <Wire.h>
 
+byte Signature = 11001011;
 int alarmStatus = 0;
 int hashPoint = 0;
 int slaveAddress = 127;
@@ -61,7 +62,7 @@ void processReceived(int byteCount){
 
 
 void writeBackEvent(){
-  byte Signature = 00001011;
+
   switch (requestAddress) {
     case 200:
       Wire.write(200);
@@ -83,6 +84,7 @@ void writeBackEvent(){
       Wire.write(hash[hashPoint++]);
       if(hashPoint == 8){
         hashPoint = 0;
+        requestAddress = 0;
       }
     break;
   }

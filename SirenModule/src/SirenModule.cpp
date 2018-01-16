@@ -12,7 +12,7 @@ void SirenModule::turnOnSiren()
     digitalWrite(SirenPin,HIGH);
 }
 
-void turnOffSiren()
+void SirenModule::turnOffSiren()
 {
     digitalWrite(SirenPin,LOW);
 }
