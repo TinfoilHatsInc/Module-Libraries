@@ -1,42 +1,35 @@
 #include <Wire.h>
 
-byte Signature = 10000000;
+int SirenPin;
+byte Signature = 00000001;
 int alarmStatus = 0;
 int hashPoint = 0;
 int slaveAddress = 127;
 int hash[8];
-int Threshold;
-int SensorAnalogPin;
 int requestAddress = 200;
 
-void setup(){
+void setup(){  
+  Serial.begin(9600);
+  SirenModule(9);
+  turnOnSiren();
+  
+  
+  Serial.println(SirenPin);
+  delay(100);
+  turnOffSiren();
   Wire.begin(slaveAddress);
-  Wire.onReceive(processReceived);
   Wire.onRequest(writeBackEvent);
-    SensorAnalogPin = 0;
-    Serial.begin(9600);
-    Threshold = 450;
-    //TEST INDICATOR
-    pinMode(LED_BUILTIN, OUTPUT);
+  Wire.onReceive(processReceived);
 }
 
 void loop(){
-  CheckTrigger();
-  Serial.println(alarmStatus);
-}
-
-void CheckTrigger(){
-    int analogValue = analogRead(SensorAnalogPin);
-    if (analogValue < Threshold) {
-        digitalWrite(LED_BUILTIN, HIGH);
-        alarmStatus = 1;
-    } else {
-    digitalWrite(LED_BUILTIN, LOW);
-    alarmStatus = 0;
+  if(alarmStatus == 1){
+    turnOnSiren();
+  }else{
+    turnOffSiren();
   }
+  delay(10);
 }
-
-
 
 void processReceived(int byteCount){
   int temp;
@@ -117,4 +110,20 @@ void relog(int newAddr){
   Wire.begin(slaveAddress);
   Wire.onReceive(processReceived);
   Wire.onRequest(writeBackEvent);
+}
+
+void SirenModule(int pin)
+{
+    SirenPin = pin;
+    pinMode(SirenPin,OUTPUT);
+}
+
+void turnOnSiren()
+{
+    digitalWrite(SirenPin,LOW);
+}
+
+void turnOffSiren()
+{
+    digitalWrite(SirenPin,HIGH);
 }

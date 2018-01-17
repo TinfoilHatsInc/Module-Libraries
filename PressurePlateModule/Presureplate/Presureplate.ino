@@ -12,7 +12,6 @@ int requestAddress = 200;
 
 
 void setup(){
-  Serial.begin(9600);
   Wire.begin(slaveAddress);
   Wire.onReceive(processReceived);
   Wire.onRequest(writeBackEvent);
@@ -29,10 +28,6 @@ void setup(){
 
 void loop(){
   CheckTrigger();
-  Serial.println(alarmStatus);
-  Serial.println(digitalRead(SensorInputPin));
-  Serial.println(Armed);
-  delay(100);
 }
 
 void Arm(){
